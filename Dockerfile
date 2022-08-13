@@ -1,5 +1,7 @@
 FROM php:8.1-cli-alpine
 
+ENV ACCESS_KEY=qwerty
+
 WORKDIR /opt/mongodb-php-gui
 COPY . /opt/mongodb-php-gui
 

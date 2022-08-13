@@ -44,7 +44,18 @@ class AuthController extends Controller {
         $requiredFields = [];
         $_SESSION['mpg'] = [];
 
-        if ( isset($_POST['uri']) ) {
+        if (empty($_POST['password'])){
+            $requiredFields[] = 'Password';
+            return $requiredFields;
+        }
+
+        if(strcmp($_POST['password'],getenv("ACCESS_KEY")) != 0){
+            echo "Password mismatch";
+            $requiredFields[] = 'Password';
+            return $requiredFields;
+        }
+
+        if ( isset($_POST['uri'])) {
 
             if ( preg_match(MongoDBHelper::URI_REGEX, $_POST['uri']) ) {
                 $_SESSION['mpg']['mongodb_uri'] = $_POST['uri'];
@@ -52,31 +63,7 @@ class AuthController extends Controller {
                 $requiredFields[] = 'URI';
             }
 
-        } elseif ( isset($_POST['host']) ) {
-
-            if ( isset($_POST['user']) && !empty($_POST['user']) ) {
-                $_SESSION['mpg']['mongodb_user'] = $_POST['user'];
-            }
-    
-            if ( isset($_POST['password']) && !empty($_POST['password']) ) {
-                $_SESSION['mpg']['mongodb_password'] = $_POST['password'];
-            }
-    
-            if ( !empty($_POST['host']) ) {
-                $_SESSION['mpg']['mongodb_host'] = $_POST['host'];
-            } else {
-                $requiredFields[] = 'Host';
-            }
-    
-            if ( isset($_POST['port']) && !empty($_POST['port']) ) {
-                $_SESSION['mpg']['mongodb_port'] = $_POST['port'];
-            }
-            
-            if ( isset($_POST['database']) && !empty($_POST['database']) ) {
-                $_SESSION['mpg']['mongodb_database'] = $_POST['database'];
-            }
-
-        } else {
+        }else {
             $requiredFields[] = 'URI or Host';
         }
 
