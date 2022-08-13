@@ -48,7 +48,7 @@
 
                     <div class="card-header text-center text-nowrap">
                         <img src="./assets/images/mpg-icon.svg" width="32" height="32" />
-                        <h3 class="mpg-card-header-title d-inline align-middle">Customized MongoDB PHP GUI</h3>
+                        <h3 class="mpg-card-header-title d-inline align-middle">MongoDB WEB UI</h3>
                     </div>
                     
                     <div class="card-body">

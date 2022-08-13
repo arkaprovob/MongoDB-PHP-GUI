@@ -54,31 +54,8 @@ class Login {
    * Defines background.
    */
   setBackground() {
-
-    const randomImage = UnsplashImage.getRandom()
-    const abortController = new AbortController()
-
-    // We will abort fetch request if it takes more than one second.
-    const timeoutID = setTimeout(() => abortController.abort(), 1000)
-
-    fetch(randomImage.imageURL, { signal: abortController.signal })
-      .then(response => {
-        clearTimeout(timeoutID)
-        return response.blob()
-      })
-      .then(blob => {
-        const blobURL = URL.createObjectURL(blob)
-        this.background.style.backgroundImage = `url(${blobURL})`
-        this.backgroundCreditLink.textContent = `Image by ${randomImage.authorName}`
-        this.backgroundCreditLink.href = randomImage.authorURL
-        this.cardsContainer.classList.add('reveal')
-      })
-      .catch(_error => {
-        console.warn('Failed to fetch unsplash.com. Fallback to local image.')
-        this.background.classList.add('fallback')
-        this.cardsContainer.classList.add('reveal')
-      })
-
+    this.background.classList.add('fallback')
+    this.cardsContainer.classList.add('reveal')
   }
 
   /**

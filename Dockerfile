@@ -1,6 +1,6 @@
 FROM php:8.1-cli-alpine
 
-ENV ACCESS_KEY=qwerty
+ENV ACCESS_KEY=secret
 
 WORKDIR /opt/mongodb-php-gui
 COPY . /opt/mongodb-php-gui
